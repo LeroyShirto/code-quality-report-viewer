@@ -9,9 +9,8 @@
           <p>Description: {{issue.description}}</p>
           <p>Categories: {{issue.categories}}</p>
           <p>Path: {{issue.location.path}}</p>
-          <p
-            v-if="issue.location.hasOwnProperty('positions')"
-          >Line: {{issue.location.positions.begin.line}} Column: {{issue.location.positions.begin.column}}</p>
+          <p v-if="issue.location.hasOwnProperty('positions')">Line: {{issue.location.positions.begin.line}} Column: {{issue.location.positions.begin.column}}</p>
+          <p v-if="issue.location.hasOwnProperty('lines')">Line: {{issue.location.lines.begin}} Column: {{issue.location.lines.end}}</p>
         </b-card>
       </div>
       <div class="col-4">

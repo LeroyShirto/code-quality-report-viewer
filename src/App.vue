@@ -13,10 +13,15 @@
       </div>
     </header>
     <main role="main">
-      <issues-list :report-data=reportData></issues-list>
+      <div class="container mt-2">
+        <b-btn @click="loadJson()">Load Json</b-btn>
+        <b-btn class="ml-2" @click="clearJsonLoad()">Clear</b-btn>
+        <b-textarea class="mt-2" v-if="showLoadJson" v-model="reportJsonString"></b-textarea>
+      </div>
+      <issues-list v-if="reportData" :report-data=reportData></issues-list>
     </main>
     
-    <footer class="text-muted">
+    <footer class="text-muted mt-5">
       <div class="container">
         <p class="float-right">
           <a href="#">Back to top</a>
@@ -28,7 +33,6 @@
 
 <script>
 import IssuesList from './components/IssuesList.vue'
-import reportdataJson from './testData/gl-code-quality-report-small.json'
 
 export default {
   name: 'app',
@@ -37,7 +41,19 @@ export default {
   },
   data() {
     return{
-      reportData: reportdataJson
+      showLoadJson: true,
+      reportJsonString: '',
+      reportData: null
+    }
+  },
+  methods: {
+    loadJson() {
+      this.reportData = JSON.parse(this.reportJsonString)
+      this.showLoadJson = false
+    },
+    clearJsonLoad() {
+      this.reportData = ''
+      this.showLoadJson = true
     }
   }
 }
